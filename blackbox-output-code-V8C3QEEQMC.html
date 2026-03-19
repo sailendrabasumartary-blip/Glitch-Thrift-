@@ -1,0 +1,123 @@
+import React, { useState } from 'react';
+
+const products = [
+  {
+    id: 1,
+    name: "Vintage Graphic Tee",
+    price: 24.99,
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop&crop=center",
+    category: "Tops"
+  },
+  {
+    id: 2,
+    name: "High Waist Mom Jeans",
+    price: 39.99,
+    image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=500&fit=crop&crop=center",
+    category: "Bottoms"
+  },
+  {
+    id: 3,
+    name: "Chunky Gold Chain",
+    price: 18.99,
+    image: "https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?w=400&h=500&fit=crop&crop=center",
+    category: "Accessories"
+  },
+  {
+    id: 4,
+    name: "Oversized Hoodie",
+    price: 49.99,
+    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=500&fit=crop&crop=center",
+    category: "Tops"
+  },
+  {
+    id: 5,
+    name: "Retro Sneakers",
+    price: 79.99,
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=500&fit=crop&crop=center",
+    category: "Shoes"
+  },
+  {
+    id: 6,
+    name: "Bucket Hat",
+    price: 22.99,
+    image: "https://images.unsplash.com/photo-1594736797933-d0401ba7e0c4?w=400&h=500&fit=crop&crop=center",
+    category: "Accessories"
+  }
+];
+
+const categories = [
+  { name: "Tops", icon: "👕", color: "from-pink-400 to-purple-500" },
+  { name: "Bottoms", icon: "👖", color: "from-blue-400 to-indigo-500" },
+  { name: "Accessories", icon: "💍", color: "from-yellow-400 to-orange-500" },
+  { name: "Shoes", icon: "👟", color: "from-green-400 to-teal-500" },
+  { name: "Outerwear", icon: "🧥", color: "from-red-400 to-pink-500" }
+];
+
+const Navbar = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  return (
+    <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              ThriftVibe
+            </h1>
+          </div>
+
+          {/* Search Bar */}
+          <div className="flex-1 max-w-md mx-8">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search thrift treasures..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-2 pl-12 pr-4 rounded-2xl bg-gray-100/80 border border-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-sm"
+              />
+              <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Cart Icon */}
+          <div className="flex items-center space-x-4">
+            <button className="relative p-2 text-gray-600 hover:text-purple-600 transition-colors duration-200">
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 9.5M7 13l-1.5 9.5M16 13l1.5 9.5" />
+              </svg>
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+const HeroBanner = () => (
+  <section className="relative overflow-hidden bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 pt-20 pb-24">
+    <div className="absolute inset-0 bg-black/20" />
+    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+      <h1 className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent drop-shadow-2xl">
+        Thrift in Style
+      </h1>
+      <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto opacity-90 drop-shadow-lg">
+        Score vintage vibes & sustainable steals. One-of-a-kind finds for your Gen-Z glow-up.
+      </p>
+      <button className="group relative px-12 py-4 bg-white text-purple-600 font-bold text-lg rounded-3xl hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-purple-500/25 hover:-translate-y-1">
+        Shop Now
+        <span className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 -skew-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" />
+        <span className="relative z-10">✨</span>
+      </button>
+    </div>
+    <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/50 to-transparent" />
+  </section>
+);
+
+const FeaturedProducts = () => (
+  <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <div className="max-w-7xl mx-auto
