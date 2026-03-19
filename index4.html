@@ -1,0 +1,170 @@
+import React, { useState } from 'react';
+
+const ProductCard = ({ 
+  product, 
+  onAddToCart, 
+  onQuickView,
+  className = "" 
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const defaultProps = {
+    id: 1,
+    name: "Vintage Graphic Tee",
+    price: 24.99,
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop&crop=center",
+    category: "Tops",
+    stock: true
+  };
+
+  const { id, name, price, image, category, stock } = product || defaultProps;
+
+  return (
+    <div 
+      className={`
+        group relative bg-white/70 backdrop-blur-sm 
+        rounded-3xl p-6 hover:shadow-2xl hover:shadow-purple-500/25 
+        transition-all duration-500 hover:-translate-y-3 
+        border border-gray-100 hover:border-purple-200/50
+        overflow-hidden max-w-sm mx-auto
+        ${className}
+      `}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Product Image Container */}
+      <div className="relative overflow-hidden rounded-2xl mb-6 aspect-video bg-gradient-to-br from-purple-500/5 to-pink-500/5">
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 animate-pulse flex items-center justify-center">
+            <div className="w-12 h-12 bg-white/20 rounded-2xl animate-spin border-4 border-white/30 border-t-transparent" />
+          </div>
+        )}
+        
+        <img 
+          src={image}
+          alt={name}
+          className={`
+            w-full h-full object-cover transition-all duration-700
+            group-hover:scale-110 group-hover:brightness-110
+            ${imageLoaded ? 'opacity-100' : 'opacity-0'}
+          `}
+          onLoad={() => setImageLoaded(true)}
+        />
+
+        {/* Category Badge */}
+        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-gray-800 shadow-lg">
+          {category}
+        </div>
+
+        {/* Quick View Button */}
+        <button
+          onClick={onQuickView}
+          className={`
+            absolute top-4 right-4 p-3 bg-white/95 backdrop-blur-md 
+            rounded-2xl shadow-2xl border border-gray-200
+            opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
+            transition-all duration-300 hover:bg-purple-50 hover:border-purple-300
+            hover:shadow-purple-500/25 hover:scale-105
+          `}
+        >
+          <svg className="w-5 h-5 text-gray-700 group-hover:text-purple-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+        </button>
+
+        {/* Sale Badge - Conditional */}
+        {!stock && (
+          <div className="absolute bottom-4 left-4 bg-red-500/90 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
+            Sold Out
+          </div>
+        )}
+      </div>
+
+      {/* Product Info */}
+      <div className="space-y-3">
+        <h3 className="font-bold text-xl leading-tight text-gray-900 line-clamp-2 group-hover:text-purple-600 transition-colors">
+          {name}
+        </h3>
+        
+        <div className="flex items-center justify-between">
+          <div className="text-2xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            ${price}
+          </div>
+          
+          {/* Heart Icon */}
+          <button className="p-2 hover:bg-pink-100/50 hover:scale-110 transition-all duration-200 rounded-xl group/wish">
+            <svg className="w-6 h-6 text-gray-400 group-hover/wish:text-pink-500 transition-colors fill-current" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Add to Cart Button */}
+        <button
+          onClick={onAddToCart}
+          disabled={!stock}
+          className={`
+            w-full bg-gradient-to-r from-purple-500 to-pink-500 
+            text-white py-4 px-6 rounded-2xl font-bold text-lg
+            shadow-xl hover:shadow-purple-500/50
+            transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5
+            ${!stock ? 'bg-gray-400/60 cursor-not-allowed from-gray-400 to-gray-500 hover:shadow-none' : ''}
+          `}
+        >
+          {stock ? (
+            <>
+              Add to Cart
+              <span className="ml-1">🛒</span>
+            </>
+          ) : (
+            'Sold Out'
+          )}
+        </button>
+      </div>
+
+      {/* Hover Glow Effect */}
+      <div className={`
+        absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20
+        opacity-0 group-hover:opacity-100 transition-opacity duration-500
+        blur-xl rounded-3xl -z-10 scale-150
+        ${isHovered ? 'animate-pulse' : ''}
+      `} />
+    </div>
+  );
+};
+
+// Usage Example
+const ExampleUsage = () => {
+  const sampleProduct = {
+    id: 1,
+    name: "Vintage Graphic Tee",
+    price: 24.99,
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop&crop=center",
+    category: "Tops"
+  };
+
+  const handleAddToCart = (product) => {
+    console.log('Added to cart:', product);
+  };
+
+  const handleQuickView = (product) => {
+    console.log('Quick view:', product);
+  };
+
+  return (
+    <div className="p-8 bg-gradient-to-br from-gray-50 to-white min-h-screen">
+      <div className="max-w-sm mx-auto">
+        <ProductCard
+          product={sampleProduct}
+          onAddToCart={() => handleAddToCart(sampleProduct)}
+          onQuickView={() => handleQuickView(sampleProduct)}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;
+export { ExampleUsage };

@@ -1,0 +1,28 @@
+import React, { useState, useEffect } from 'react';
+import ProductCard from './ProductCard'; // Import the ProductCard component
+
+// Sample data
+const sampleProducts = [
+  {
+    id: 1, name: "Vintage Graphic Tee", price: 24.99, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop", category: "Tops", size: "M", color: "Black", date: "2024-01-15"
+  },
+  {
+    id: 2, name: "High Waist Mom Jeans", price: 39.99, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=500&fit=crop", category: "Bottoms", size: "28", color: "Blue", date: "2024-01-14"
+  },
+  {
+    id: 3, name: "Chunky Gold Chain", price: 18.99, image: "https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?w=400&h=500&fit=crop", category: "Accessories", size: "One Size", color: "Gold", date: "2024-01-13"
+  },
+  {
+    id: 4, name: "Oversized Hoodie", price: 49.99, image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=500&fit=crop", category: "Tops", size: "L", color: "Green", date: "2024-01-12"
+  },
+  {
+    id: 5, name: "Retro Sneakers", price: 79.99, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=500&fit=crop", category: "Shoes", size: "10", color: "White", date: "2024-01-11"
+  },
+  {
+    id: 6, name: "Bucket Hat", price: 22.99, image: "https://images.unsplash.com/photo-1594736797933-d0401ba7e0c4?w=400&h=500&fit=crop", category: "Accessories", size: "One Size", color: "Pink", date: "2024-01-10"
+  },
+  {
+    id: 7, name: "Leather Jacket", price: 89.99, image: "https://images.unsplash.com/photo-1551024506-7eec264c27ff?w=400&h=500&fit=crop", category: "Outerwear", size: "M", color: "Black", date: "2024-01-09"
+  },
+  {
+    id: 8,
